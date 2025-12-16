@@ -15,11 +15,17 @@ def generate_run_stats(pace_min, pace_max, distance_min, distance_max):
     minutes1 = int(random_pace)
     seconds1 = round((random_pace - minutes1) * 60)
 
-    # 使用字符串格式化来确保秒数是两位数
-    seconds_str1 = f"{seconds1:02d}"
+    # 处理秒数可能为60的进位情况
+    if seconds1 == 60:
+        minutes1 += 1
+        seconds1 = 0
 
-    # 拼接成时间格式
-    time_str1 = '0' + str(minutes1) + "'" + str(seconds_str1) + '"'
+    # 使用字符串格式化来确保分钟和秒数都是合适的两位显示
+    seconds_str1 = f"{seconds1:02d}"
+    minutes_str1 = f"{minutes1:02d}"
+
+    # 拼接成时间格式，例如 05'30" 或 11'05"
+    time_str1 = f"{minutes_str1}'{seconds_str1}\""
 
     # 返回配速、路程和所需时间
     return time_str1, random_distance, time_needed
@@ -58,5 +64,37 @@ def generate_random_time_between_22_and_23():
     random_time = f"{random_hours}:{random_minutes:02d}"
 
     return random_time
+
+
+def generate_random_time_between_hours(start_hour, end_hour):
+    """生成在给定小时范围内的随机时间（24 小时制）。
+
+    支持跨午夜范围（例如 start_hour=22, end_hour=5），返回格式为 'HH:MM'。
+    """
+    minute = random.randint(0, 59)
+    if start_hour is None:
+        start_hour = 0
+    if end_hour is None:
+        end_hour = 23
+
+    try:
+        sh = int(start_hour)
+        eh = int(end_hour)
+    except Exception:
+        sh, eh = 6, 23
+
+    sh = max(0, min(23, sh))
+    eh = max(0, min(23, eh))
+
+    if sh <= eh:
+        hour = random.randint(sh, eh)
+    else:
+        # 跨午夜：在 sh..23 或 0..eh 中选一个小时
+        if random.choice([True, False]):
+            hour = random.randint(sh, 23)
+        else:
+            hour = random.randint(0, eh)
+
+    return f"{hour:02d}:{minute:02d}"
 
 # 生成并打印随机时间
