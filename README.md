@@ -1,7 +1,8 @@
 # keepweizao
 ## 运行main.py
-## widows免环境配置文件地址在
+##代码fork于https://github.com/xuanqingdaoren/keepweizao#
+##主要修改：修改了100.jpg截图为最新版本，增添输入多个月份功能，增添起始日期和终止日期自定义，增添起始时间于终止时间自定义
+##感谢支持喵，点个star喵
 
-最新的百度网盘地址链接: https://pan.baidu.com/s/1cYWWjRRu6ou3PuRr-DM0PA?pwd=6pjr 提取码: 6pjr 
-蓝奏云 https://xuanqingdaoren.lanzoub.com/iQOqb22jmnnc
-密码:i25j
+
+
